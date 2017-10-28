@@ -20,4 +20,16 @@ __bg_scraper.py__
 
 This is the script that goes through the games provided in the csv file and gets much more detailed data on each game by using Board Game Geeks XML API
 
-The plan is to grab the data and put it into a Postgres database, which can then be grabbed anytime for data analysis.
+It grabs the data from the csv file in chunks, requests the detailed information about the games using the XML API, and then puts it into a Postgres database table. Now it can be grabbed anytime for data analysis.
+
+This requires the user to set up a database named "bggdb". Or the user can edit the DATABASE variable inside the bg_scraper.py script so that it will correctly connect to their desired database on their system.
+
+```
+import bg_scraper
+
+# Creates the table on the db which will store all game info
+bg_scraper.create_table_in_database()
+
+# Will request 100 games at a time from the XML API
+bg_scraper.scrape_bg_stats(csv_file_name='BGG_GameList_tabbed.csv', chunk_size=100)
+```
