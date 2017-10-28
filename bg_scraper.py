@@ -10,7 +10,6 @@ import time
 import numpy as np
 import csv
 import psycopg2
-from psycopg2 import IntegrityError, InternalError
 
 # Global Variables
 
@@ -26,7 +25,7 @@ def create_table_in_database():
     with psycopg2.connect(DATABASE) as conn:
         with conn.cursor() as curs:
 
-            curs.execute("""CREATE TABLE boardgame (
+            curs.execute("""CREATE TABLE boardgames (
                                     id int PRIMARY KEY,
                                     rank           int,
                                     name          text,
@@ -43,7 +42,7 @@ def create_table_in_database():
                                     designers   text[],
                                     artists     text[],
                                     categories  text[],
-                                    mechanisms  text[],
+                                    mechanics  text[],
                                     family      text[],
                                     type        text[]
                                     );""")
@@ -176,7 +175,6 @@ def scrape_list_of_games(labels, bg_list, db):
     print "Erroneously Labeled Games Skipped This Chunk:", games_skipped
 
     return games_skipped
-                    
 
 def scrape_game(boardgame, csv_row, bgID):
 
@@ -198,7 +196,7 @@ def scrape_game(boardgame, csv_row, bgID):
     bg_dict['designers']     = [tag.contents[0] for tag in boardgame.find_all('boardgamedesigner')]
     bg_dict['artists']       = [tag.contents[0] for tag in boardgame.find_all('boardgameartist')]
     bg_dict['categories']    = [tag.contents[0] for tag in boardgame.find_all('boardgamecategory')]
-    bg_dict['mechanisms']    = [tag.contents[0] for tag in boardgame.find_all('boardgamemechanic')]
+    bg_dict['mechanics']    = [tag.contents[0] for tag in boardgame.find_all('boardgamemechanic')]
     bg_dict['family']        = [tag.contents[0] for tag in boardgame.find_all('boardgamefamily')]
     bg_dict['type']          = [tag.contents[0] for tag in boardgame.find_all('boardgamesubdomain')]    
 
@@ -223,7 +221,7 @@ def add_to_table(cursor, bg_dict):
                                     designers,
                                     artists,
                                     categories,
-                                    mechanisms,
+                                    mechanics,
                                     family,
                                     type
                                     ) 
@@ -244,7 +242,7 @@ def add_to_table(cursor, bg_dict):
                                     %(designers)s,
                                     %(artists)s,
                                     %(categories)s,
-                                    %(mechanisms)s,
+                                    %(mechanics)s,
                                     %(family)s,
                                     %(type)s
                                     ) ON CONFLICT DO NOTHING;""", bg_dict)
@@ -321,7 +319,7 @@ def make_game_id_list(bg_list):
 # designers -> soup.boardgames.boardgame.find_all('boardgamedesigner')
 # artist -> soup.boardgames.boardgame.find_all('boardgameartist')
 # categories -> soup.boardgames.boardgame.find_all('boardgamecategory')
-# mechanisms -> soup.boardgames.boardgame.find_all('boardgamemechanic')
+# mechanics -> soup.boardgames.boardgame.find_all('boardgamemechanic')
 # family ->  soup.boardgames.boardgame.find_all('boardgamefamily')
 # type -> soup.boardgames.boardgame.find_all('boardgamesubdomain') , drop the 'Games' at end of each name
 

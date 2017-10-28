@@ -4,7 +4,9 @@ This repo contains Python scripts that involve web scraping and eventually data 
 
 The project is based around the data provided by Board Game Geek (https://www.boardgamegeek.com)
 
-__collect_games.py__
+## Description of Python Scripts 
+
+### collect_games.py
 
 This crawls across the pages of Board Game Geek that contain lists of board games, providing 100 games per page and listed in order of their current Geek Rating. This script grabs some simple info on the games and stores them in a csv file.
 
@@ -16,7 +18,7 @@ import collect_games
 collect_games.scrape_list_of_top_games(num_games= 10000, out_file_name = 'BGG_GameList_tabbed.csv')
 ```
  
-__bg_scraper.py__
+### bg_scraper.py
 
 This is the script that goes through the games provided in the csv file and gets much more detailed data on each game by using Board Game Geeks XML API
 
@@ -32,4 +34,22 @@ bg_scraper.create_table_in_database()
 
 # Will request 100 games at a time from the XML API
 bg_scraper.scrape_bg_stats(csv_file_name='BGG_GameList_tabbed.csv', chunk_size=100)
+```
+
+### normalize_database.py
+
+Since 6 columns in the boardgames table contain text arrays, it makes it significantly more difficult to query based on those columns. Therefore this script normalizes the database by creating 6 separate tables for those 6 columns.
+
+Columns turned into new tables:
+* designers
+* artists
+* categories
+* mechanics
+* family
+* type
+
+This script can be run from the command line and it will go through and make all 6 tables. The user could also import the script and run the functions individually. 
+
+```
+$ python normalize.py
 ```
