@@ -53,3 +53,7 @@ This script can be run from the command line and it will go through and make all
 ```
 $ python normalize.py
 ```
+
+### data_analysis.py
+
+This contains a plethora of functions which access the database and provide data for analysis. Will constantly be growing with new functions as I find new things to investigate.
