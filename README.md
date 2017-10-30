@@ -59,7 +59,7 @@ Columns turned into new tables:
 This script can be run from the command line and it will go through and make all 6 tables. The user could also import the script and run the functions individually. 
 
 ```
-$ python normalize.py
+$ python normalize_database.py
 ```
 
 ### data_analysis.py
