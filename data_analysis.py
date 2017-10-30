@@ -270,7 +270,7 @@ def time_vs_complexity(time_cutoff = 1e10, cmplx_cutoff = 5):
 
     return time, complexity
 
-def avg_geek_rating_playtime_per_mechanic(rank=10000, sortby=None):
+def avg_geek_rating_playtime_per_mechanic(rank=10001, sortby=None):
     '''
     Same exact capabilities as avg_rating_per_mechanic() but it only
     considers games that are above a specified rank on boardgamegeek.com.
@@ -712,18 +712,19 @@ def scatter_plot_mechanics_with_rank(rank, top=3):
 
     fig, ax = plt.subplots(1,1)
 
-    fig.set_size_inches(11,8)
+    fig.set_size_inches(15,10)
 
-    ax.set_ylabel('Average Geek Rating')
+    ax.set_ylabel('Average Geek Rating', fontsize=16)
 
-    ax.set_xlabel('Average Playtime (minutes)')
+    ax.set_xlabel('Average Playtime (minutes)',fontsize=16)
 
     if rank >= 10000:
-        ax.set_title("Game Mechanics' Influence on All Boardgames")
+        ax.set_title("Game Mechanics' Influence on All Boardgames",
+                     fontsize=20)
 
     else:
-        ax.set_title("Game Mechanics' Influence on Top "+str(rank)+\
-                     ' Boardgames')
+        ax.set_title("Game Mechanics' Influence on Top "+str(rank-1)+\
+                     ' Boardgames', fontsize=20)
 
     # First plot all data =====================================================
     
@@ -746,7 +747,7 @@ def scatter_plot_mechanics_with_rank(rank, top=3):
 
     for label, x, y in zip(mech_list[:top], play_list[:top], avg_list[:top]):
         plt.scatter(x, y, s=10, c='k')
-        plt.annotate(label, xy = (x, y))
+        plt.annotate(label, xy = (x, y),fontsize=14)
 
     # Next plot top geek ratings ==============================================
 
@@ -760,7 +761,7 @@ def scatter_plot_mechanics_with_rank(rank, top=3):
 
     for label, x, y in zip(mech_list[:top], play_list[:top], avg_sorted[:top]):
         plt.scatter(x, y, s=10, c='k')
-        plt.annotate(label, xy = (x, y))
+        plt.annotate(label, xy = (x, y),fontsize=14)
 
     # Next plot top playtimes =================================================
 
@@ -774,9 +775,11 @@ def scatter_plot_mechanics_with_rank(rank, top=3):
 
     for label, x, y in zip(mech_list[:top], play_sorted[:top], avg_list[:top]):
         plt.scatter(x, y, s=10, c='k')
-        plt.annotate(label, xy = (x, y))
+        plt.annotate(label, xy = (x, y),fontsize=14)
 
-    ax.legend()
+    ax.legend(fontsize=14)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
 
     plt.show()
 
@@ -950,6 +953,14 @@ def scatter_plot_complxr_vs_sugg_age(column, item_subset=None, num_voters=0):
 
     fig, ax = plt.subplots(1,1)
 
+    fig.set_size_inches(15,10)
+
+    ax.set_ylabel('Complexity Rating', fontsize=16)
+
+    ax.set_xlabel('Suggested Age', fontsize=16)
+
+    ax.set_title(column.capitalize() + " In Games", fontsize=20)
+
     col_data = count_column(column)
 
     for item_name, game_count in col_data:
@@ -966,7 +977,7 @@ def scatter_plot_complxr_vs_sugg_age(column, item_subset=None, num_voters=0):
 
                 avg_num_v = int(np.mean(num_v).round())
 
-                plt.scatter(sugg_age, compr, alpha=0.75,
+                plt.scatter(sugg_age, compr, alpha=0.75, s=75,
                             label=item_name)# \
                             #+' \nAverage Num Voters: ' + str(avg_num_v))
                             #label=str(game_count)+' '+item_name \
@@ -982,23 +993,15 @@ def scatter_plot_complxr_vs_sugg_age(column, item_subset=None, num_voters=0):
 
             avg_num_v = int(np.mean(num_v).round())
 
-            plt.scatter(sugg_age, compr, alpha=0.75,
+            plt.scatter(sugg_age, compr, alpha=0.75, s=75,
                         label=item_name)# \
                          #   +' \nAverage Num Voters: ' + str(avg_num_v))
                         #label=str(game_count)+' '+item_name \
                         #+' \nAverage Num Voters: ' + str(avg_num_v))
 
-    #plt.plot(np.linspace(5.5, 9.5), np.linspace(5.5,9.5), c='k', lw=2, 
-    #         label='Geek Rating = Average Rating')
-
-    ax.legend()
-
-    ax.set_ylabel('Complexity Rating')
-
-    ax.set_xlabel('Suggested Age')
-
-    ax.set_title(column.capitalize() + " In Games")# With More Than "+\
-                 #str(num_voters) + " Voters")
+    ax.legend(fontsize=14)
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
 
     plt.show()
 

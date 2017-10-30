@@ -65,3 +65,5 @@ $ python normalize.py
 ### data_analysis.py
 
 This contains a plethora of functions which access the database and provide data for analysis. Will constantly be growing with new functions as I find new things to investigate.
+
+Check out my Jupyter notebooks to seem some of this script in action!
