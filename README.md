@@ -4,6 +4,14 @@ This repo contains Python scripts that involve web scraping and eventually data 
 
 The project is based around the data provided by Board Game Geek (https://www.boardgamegeek.com)
 
+## Quirky Things I Have Found in the Data So Far...
+
+__Note__: Some data are poll based and therefore can change over time as more people contribute to a boardgame's data by voting in polls. Therefore my data is collected from a frozen point in time; things will surely change if I were to scrape again in a month, a year, etc.
+
+* One game was published in the year 3500 BC! It was an ancient Egyptian game called Senet (https://boardgamegeek.com/boardgame/2399/senet). There are many games on boardgamegeek.com that span across the centuries, such as Chess (1475 AD).
+
+* One game has a suggested age of 42+ for players! (https://boardgamegeek.com/boardgame/97683/south-african-railroads). Although only one/two people have voted on the suggested age poll for this boardgame, the vote was cast at 14+ years old.
+
 ## Description of Python Scripts 
 
 ### collect_games.py
